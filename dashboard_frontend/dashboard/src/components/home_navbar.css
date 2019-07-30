@@ -1,0 +1,26 @@
+.nav-link {
+  color: #484646 !important;
+}
+
+.nav-link:hover {
+  background-color: #DAD1CF !important;
+  border-radius: 2px !important;
+}
+
+
+/* .navbar ul{
+  padding: 0px 15px !important;
+} */
+
+#navbar-link-id {
+  color: #484646;
+  font-style: bold;
+  font-weight: bold;
+  padding: 5px 5px;
+  text-decoration:none;
+}
+
+.nav-link-login:hover {
+  background-color: #DAD1CF;
+  border-radius: 2px;
+}

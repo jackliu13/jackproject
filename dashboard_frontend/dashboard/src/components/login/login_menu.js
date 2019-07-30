@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Label from "react-bootstrap/Form";
-import Input from "react-bootstrap/Form";
 import FormGroup from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import ControlLabel from "react-bootstrap/FormControl";
@@ -28,7 +27,7 @@ export default class Login_Menu extends Component {
 
   handleChange = event => {
     this.setState({
-      [event.target.id]: event.target.value
+      [event.target.type] : event.target.value
     });
   }
 
@@ -38,34 +37,40 @@ export default class Login_Menu extends Component {
 
   render() {
     return (
-      <Container className="Login_Menu">
-              <h2>Sign In</h2>
-              <Form className="form">
-                <Col>
-                  <FormGroup>
-                    <Label>Email</Label>
-                    <Form.Control
-                      type="email"
-                      name="email"
-                      id="exampleEmail"
-                      placeholder="myemail@email.com"
-                    />
-                  </FormGroup>
-                </Col>
-                <Col>
-                  <FormGroup>
-                    <Label for="examplePassword">Password</Label>
-                    <Form.Control
-                      type="password"
-                      name="password"
-                      id="examplePassword"
-                      placeholder="********"
-                    />
-                  </FormGroup>
-                </Col>
-                <Button>Submit</Button>
-              </Form>
-            </Container>
+      <div className="Login">
+
+        <form onSubmit={this.handleSubmit}>
+          <h1> Login </h1>
+          <hr />
+          <FormGroup controlId="email" bsSize="large">
+            <Label>Email</Label>
+            <FormControl
+              autoFocus
+              type="email"
+              placeholder="Enter your email..."
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large">
+            <Label>Password</Label>
+            <FormControl
+              placeholder="Enter your password..."
+              value={this.state.password}
+              onChange={this.handleChange}
+              type="password"
+            />
+          </FormGroup>
+          <Button
+            block
+            bsSize="large"
+            disabled={!this.validateForm()}
+            type="submit"
+          >
+            Login
+          </Button>
+        </form>
+      </div>
     );
   }
 }

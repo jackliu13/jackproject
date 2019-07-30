@@ -1,0 +1,15 @@
+from database.orm import ORM
+
+class UserProject(ORM):
+
+    fields = ['userid', 'projectid', 'userrole']
+    dbtable = "user_project"
+
+    def __init__(self, **kwargs):
+        self.id = kwargs.get('id')
+        self.userid = kwargs.get('userid')
+        self.projectid = kwargs.get('projectid')
+        self.userrole = kwargs.get('userrole') #Array / List of roles
+        # self.tags = kwargs.get('tags') #Potentially a dictionary
+        # self.creationdate = kwargs.get('creationdate')
+        # self.api_key = kwargs.get('api_key',self.generate_api_key())
