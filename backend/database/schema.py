@@ -67,8 +67,10 @@ def build_project():
         cur.execute('''
             CREATE TABLE project(
                 id uuid DEFAULT uuid_generate_v4(),
+                owner uuid NOT NULL,
                 title VARCHAR NOT NULL,
                 description VARCHAR,
+                tags TEXT [],
                 PRIMARY KEY (id)
                 )''')
 
@@ -80,9 +82,9 @@ def build_user_project():
         cur.execute('''
             CREATE TABLE user_project(
                 id uuid DEFAULT uuid_generate_v4(),
-                userId uuid,
-                projectId uuid,
-                userrole text[],
+                userid uuid,
+                projectid uuid,
+                userrole TEXT [],
                 PRIMARY KEY (id),
                 FOREIGN KEY (userId) REFERENCES user_info(id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
                 FOREIGN KEY (projectId) REFERENCES project(id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION

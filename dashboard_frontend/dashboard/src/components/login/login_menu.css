@@ -17,14 +17,30 @@ label {
   font-weight: 600;
 }
 
-.Login form button {
+.Login form button.testbutton {
   padding: 5px 5px;
-  justify-content: flex-end !important;
-  background-color: white !important;
-  border-radius: 3px !important;
-  border-color: black !important;
-  color: black !important;
+  width: 85%;
+  justify-content: flex-end;
+  background-color: #E58B88;
+  border-radius: 3px;
+  border-color: #D2A3A9;
+  color: white;
+  font-weight: bold;
 }
+
+.Login form button.testbutton:enabled:hover {
+  border: none;
+  background-color: #CA7E8D
+}
+
+.Login form button.testbutton:active:hover {
+  background-color: #CA7E8D
+}
+
+.Login form button.testbutton:active:focus {
+  background-color: #CA7E8D
+}
+
 
 
 .Login {

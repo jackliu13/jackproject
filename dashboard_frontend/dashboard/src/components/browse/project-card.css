@@ -1,0 +1,23 @@
+.individual-card {
+  border-top: 3px solid #DAD1CF;
+  width: 33vw;
+  height: 33vh;
+}
+
+.individual-card:hover {
+  cursor: pointer;
+  border: 1px solid gray;
+}
+
+.individual-card:active:hover {
+  opacity:0.25;
+  cursor: pointer;
+  border: 2px solid black;
+}
+
+
+
+
+.browse-projects {
+  padding-bottom: 20px;
+}

@@ -13,3 +13,10 @@ class UserProject(ORM):
         # self.tags = kwargs.get('tags') #Potentially a dictionary
         # self.creationdate = kwargs.get('creationdate')
         # self.api_key = kwargs.get('api_key',self.generate_api_key())
+
+    def json(self):
+        return {
+        "userid": self.userid,
+        "projectid": self.projectid,
+        "userrole": self.userrole
+    }

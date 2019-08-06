@@ -53,10 +53,10 @@ UPDATE {tablename} SET {update_column_list} WHERE id=%s; """
             cur.execute(SQL, propvals)
 
     @classmethod
-    def find_one(cls, SQL, values=tuple()):
+    def select_one(cls, SQL, values=tuple()):
         with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
                               port = "5432", database = "database") as conn:
-            cur = conn.cursor()
+            cur = conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
             cur.execute(SQL, values)
             row = cur.fetchone()
             if row is None:
@@ -70,6 +70,17 @@ UPDATE {tablename} SET {update_column_list} WHERE id=%s; """
                               port = "5432", database = "database") as conn:
             cur = conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
             cur.execute(SQL)
+            rows = cur.fetchall()
+            print(rows)
+            return [cls(**row) for row in rows]
+
+    #USE when you need a more specific select_all statement (with inputed values)
+    @classmethod
+    def select_all_where(cls, SQL, values=tuple()):
+        with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
+                              port = "5432", database = "database") as conn:
+            cur = conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
+            cur.execute(SQL, values)
             rows = cur.fetchall()
             print(rows)
             return [cls(**row) for row in rows]

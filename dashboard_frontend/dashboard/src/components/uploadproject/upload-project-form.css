@@ -1,0 +1,58 @@
+.upload-success {
+  position: 'absolute';
+  top: 8%;
+  right: 1%;
+  /* bring your own prefixes */
+  transform: translate(-1%, -1%);
+}
+
+form {
+  color: gray;
+  font-size: 13px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.form {
+  padding: 1em;
+}
+
+label {
+  display: flex;
+  font-weight: 600;
+}
+
+.UploadProjectForm form button {
+  padding: 5px 5px;
+  width: 30%;
+  justify-content: flex-end !important;
+  background-color: #E58B88 !important;
+  border-radius: 3px !important;
+  border-color: #D2A3A9 !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+.UploadProjectForm form button:hover:enabled {
+  background-color: #CA7E8D !important;
+}
+
+
+.UploadProjectForm {
+  padding: 20px 0;
+}
+
+.UploadProjectForm form {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.UploadProjectForm form-group {
+  margin : 100px;
+}
+
+.UploadProjectForm form h1 {
+  text-align: center;
+}
