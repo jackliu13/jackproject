@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom';
+
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Label from "react-bootstrap/Form";
@@ -9,6 +11,9 @@ import ControlLabel from "react-bootstrap/FormControl";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
+import {isLoggedIn} from '../../services/logged-in.js';
+
 import "./login_menu.css";
 
 export default class Login_Menu extends Component {
@@ -69,6 +74,10 @@ export default class Login_Menu extends Component {
 
 
   render() {
+    if (isLoggedIn()){
+      return <Redirect to="/home/browse" />
+    }
+
     return (
       <div className="Login">
 

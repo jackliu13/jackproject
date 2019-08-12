@@ -19,12 +19,14 @@ import BrowseProjectCollection from '../browse/project-card-collection.js';
 export default class UserProfile extends React.Component {
 
   state = {
-    items : []
+    items : [],
+    userinfo: ""
   };
 
 
   constructor(props) {
     super(props);
+    this.findUserInfo = this.findUserInfo.bind(this)
   }
 
   // reloadItemList = () => {
@@ -32,16 +34,16 @@ export default class UserProfile extends React.Component {
 
 
   componentDidMount(){
+    this.findUserInfo()
     const url = "http://127.0.0.1:5000/api/projects/fromuser"
     const promise = fetch(url,{
     method: "post",
     mode: "cors",
     headers:{
       "content-type" : "application/json"
-
     },
     body: JSON.stringify({
-      userid: window.sessionStorage.getItem('user_id')
+      userid: this.props.match.params.userid
     })
     })
     promise.then(response=>response.json()).then(json=>{
@@ -53,10 +55,30 @@ export default class UserProfile extends React.Component {
     this.setState({
       subtitle: "Browsing all projects that I have created..."
     })
+  }
 
+
+  findUserInfo(){
+    const url = "http://127.0.0.1:5000/api/user"
+    const promise = fetch(url,{
+    method: "post",
+    mode: "cors",
+    headers:{
+      "content-type" : "application/json"
+    },
+    body: JSON.stringify({
+      userid: this.props.match.params.userid
+    })
+    })
+    promise.then(response=>response.json()).then(json=>{
+      this.setState({
+        userinfo: json.user
+      });
+    }).catch(error=>console.log(error));
   }
 
   render() {
+    console.log("user",this.state.items)
 
     return (
       <Container>
@@ -72,7 +94,7 @@ export default class UserProfile extends React.Component {
           src="https://icon-library.net/images/default-user-icon/default-user-icon-8.jpg"
         />
       </Figure>
-      <h1>Jack Liu</h1>
+      <h1>{this.state.userinfo.realname}</h1>
       <p><b> 731 </b> Projects</p>
 
       <div>

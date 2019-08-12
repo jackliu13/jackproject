@@ -18,9 +18,9 @@ export default class BrowseProjectCard extends Component {
   }
 
   handleClick = event => {
-    // this.setState({
-    //   showModal: true,
-    // });
+    this.setState({
+      showModal: true,
+    });
   }
 
   hideModal(){
@@ -41,7 +41,9 @@ export default class BrowseProjectCard extends Component {
           </span>
       )
     }
-    console.log(this.props.items)
+
+    let PROJECT_URL = "/home/project/" + this.props.id;
+
     return (
       <>
       <Modal show={this.state.showModal} onHide={this.hideModal}>
@@ -51,19 +53,19 @@ export default class BrowseProjectCard extends Component {
           <Modal.Body>{this.props.description}</Modal.Body>
       </Modal>
 
-      <Card className="individual-card" onClick={() => this.props.onClick(this.props.id)}>
-      <Card.Body>
+      <Card className="individual-card" onClick={() => this.handleClick()}>
+      <Card.Body className="individual-card-body">
         {items}
         <Card.Title>{this.props.title}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
-            Test Subtitle
+            <a href={PROJECT_URL}>Link to Project Page</a>
         </Card.Subtitle>
         <Card.Text>
           {this.props.description}
         </Card.Text>
+
       </Card.Body>
       <Card.Footer>
-      {this.props.owner}
       </Card.Footer>
       </Card>
       </>

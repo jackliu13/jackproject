@@ -39,7 +39,7 @@ export default class Home_Nav extends React.Component{
                     </li>
                 </ul>
                 <ul className="navbar-nav w-100 justify-content-end d-flex">
-                <NavDropdown name="Jack Liu">
+                <NavDropdown name="Second user">
                   <div className="dropdown-header"> Test</div>
 
                    <a className="dropdown-item" href={profileURL}>Profile</a>

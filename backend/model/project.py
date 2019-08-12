@@ -2,7 +2,7 @@ from database.orm import ORM
 from .user_project import UserProject
 class Project(ORM):
 
-    fields = ['title', 'description', 'owner', 'tags']
+    fields = ['owner', 'title', 'description', 'tags']
     dbtable = "project"
 
     def __init__(self, **kwargs):
@@ -33,12 +33,20 @@ class Project(ORM):
 
     @classmethod
     def projects_fromuser(cls, userid):
-        SQL = """SELECT * FROM project JOIN user_project ON user_project.projectid=project.id
+        SQL = """SELECT project.* FROM project JOIN user_project ON user_project.projectid=project.id
                     JOIN user_info ON user_info.id=user_project.userid
                     WHERE user_info.id=%s;
             """
         return cls.select_all_where(SQL, (userid,))
 
+    @classmethod
+    def project_info(cls, id):
+        SQL = "SELECT project.* FROM project WHERE id=%s;"
+        project = cls.select_one(SQL, (id,))
+        if project is None:
+            return None
+        print(project)
+        return project
 
     def json(self):
         return {

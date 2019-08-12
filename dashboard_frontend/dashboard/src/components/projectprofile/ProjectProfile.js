@@ -6,31 +6,45 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
+import ListGroup from 'react-bootstrap/ListGroup'
+import Button from "react-bootstrap/Button";
 
-import Figure from 'react-bootstrap/Figure'
+import Figure from 'react-bootstrap/Figure';
 
+import './ProjectProfile.css';
+
+import ProjectOverview from './ProjectOverview.js';
+import ProjectUsers from './ProjectUsers.js';
 
 import BrowseProjectCollection from '../browse/project-card-collection.js';
 
 export default class ProjectProfile extends React.Component {
 
   state = {
-    items : []
+    items : [],
+    users: [],
+    selectedTab: "Overview"
   };
 
 
   constructor(props) {
     super(props);
+    this.changeTab = this.changeTab.bind(this)
+    this.getUsers = this.getUsers.bind(this)
   }
 
   // reloadItemList = () => {
   // }
 
+  changeTab = (tab) => {
+    this.setState({
+      selectedTab: tab
+    })
+  }
 
   componentDidMount(){
-    const url = "http://127.0.0.1:5000/api/projects/fromuser"
+
+    const url = "http://127.0.0.1:5000/api/project/select"
     const promise = fetch(url,{
     method: "post",
     mode: "cors",
@@ -39,45 +53,70 @@ export default class ProjectProfile extends React.Component {
 
     },
     body: JSON.stringify({
-      userid: window.sessionStorage.getItem('user_id')
+      projectid: this.props.match.params.projectid
     })
     })
     promise.then(response=>response.json()).then(json=>{
-      console.log(json.projects)
+      console.log(json.project)
       this.setState({
-        items: json.projects
+        items: json.project
       });
     }).catch(error=>console.log(error));
-    this.setState({
-      subtitle: "Browsing all projects that I have created..."
-    })
+
+    this.getUsers()
+
+
 
   }
 
+
+  getUsers(){
+    const url_users = "http://127.0.0.1:5000/api/project/users"
+    const promise_users = fetch(url_users,{
+    method: "post",
+    mode: "cors",
+    headers:{
+      "content-type" : "application/json"
+    },
+    body: JSON.stringify({
+      projectid: this.props.match.params.projectid
+    })
+    })
+    promise_users.then(response2=>response2.json()).then(json2=>{
+      this.setState({
+        users: json2.users
+      });
+      console.log("USERS", this.state.users)
+    }).catch(error=>console.log(error));
+  }
+
+
+
   render() {
+    let tab = <h1> Error loading container... </h1>
+    if (this.state.selectedTab === 'Overview'){
+      tab = <ProjectOverview title={this.state.items.title} description={this.state.items.description} tags={this.state.items.tags} />
+    }
+    else if (this.state.selectedTab === 'People'){
+      tab = <ProjectUsers users={this.state.users} />
+
+    }
+
+
 
     return (
       <Container>
       <Row>
       <Col md={2}>
-
+      <ListGroup variant="flush">
+        <ListGroup.Item action onClick={() => {this.changeTab('Overview')}}>Overview</ListGroup.Item>
+        <ListGroup.Item action onClick={() => {this.changeTab('Updates')}}>Updates</ListGroup.Item>
+        <ListGroup.Item action onClick={() => {this.changeTab('People')}}>People</ListGroup.Item>
+        <ListGroup.Item action onClick={() => {this.changeTab('Feedback')}}>Feedback</ListGroup.Item>
+      </ListGroup>
       </Col>
       <Col>
-          <h1>Project Name</h1>
-          <p><b> 731 </b> Projects</p>
-
-          <div>
-          <b>Project Description: </b>
-          <br />
-          New York City, NY
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pulvinar at arcu id finibus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean lacinia urna metus, eu vestibulum augue posuere quis. Vestibulum pretium, mauris ut pharetra mollis, dui lectus porttitor magna, ut dignissim sem nunc ut mi.
-
-          <br />
-          <br />
-          <b>Location: </b>
-          <br />
-          New York City, NY
-          </div>
+        {tab}
       </Col>
       </Row>
       </Container>

@@ -1,0 +1,62 @@
+.joinProject {
+  background-color: #f08080	;
+  width: 40%;
+  height: 80px;
+  justify-content: flex-end;
+  outline: none !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-left-width: 5px !important;
+  border-left-color: #ff6347 !important;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.joinProject:hover, .joinProject:active, .joinProject:focus, .joinProject:active:focus {
+  background-color: #f08080 !important;
+  outline: none !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-left-width: 5px !important;
+  border-left-color: #ff6347 !important;
+  color: white !important;
+}
+
+
+.followProject {
+  background-color: #7b68ee;
+  width: 40%;
+  height: 80px;
+  justify-content: flex-end;
+  outline: none !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-left-width: 5px !important;
+  border-left-color: #6a5acd !important;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.followProject:hover, .followProject:active, .followProject:focus, .followProject:active:focus {
+  background-color: #ffdab9 !important;
+  outline: none !important;
+  border-top: none !important;
+  border-right: none !important;
+  border-bottom: none !important;
+  border-left-width: 5px !important;
+  border-left-color: #6a5acd !important;
+  color: black !important;
+}
+
+/* *.btn, .btn:active, .btn:focus, .btn:active:focus, .btn.active:focus {
+        outline: none !important;
+        border: none !important;
+    } */
+.project-overview_button-row {
+  
+}

@@ -16,6 +16,7 @@ import Browse from './components/browse/Browse.js'
 import UploadProject from './components/uploadproject/UploadProject.js'
 import UserProfile from './components/userprofile/UserProfile.js'
 import ProjectProfile from './components/projectprofile/ProjectProfile.js'
+import Landing from './components/landing/Landing.js'
 
 
 class Home extends React.Component {
@@ -26,6 +27,7 @@ class Home extends React.Component {
         <HomeNav />
         <div>
         <BrowserRouter>
+        <Route exact path = "/home" render={(props) => <Landing{...props}/>}/>
         <Route path = "/home/browse" render={(props) => <Browse{...props}/>}/>
         <Route path = "/home/login" render={(props) => <Login_Menu{...props}/>}/>
         <Route path = "/home/upload" render={(props) => <UploadProject{...props}/>}/>

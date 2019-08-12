@@ -26,6 +26,7 @@ project = Project(**{
             "owner" : user.id
         })
 project.save()
+project.addUser(user.id, "Owner")
 project.title = "New Title"
 project.save()
 #

@@ -1,4 +1,5 @@
 from database.orm import ORM
+from .user import User
 
 class UserProject(ORM):
 
@@ -13,6 +14,21 @@ class UserProject(ORM):
         # self.tags = kwargs.get('tags') #Potentially a dictionary
         # self.creationdate = kwargs.get('creationdate')
         # self.api_key = kwargs.get('api_key',self.generate_api_key())
+
+    @classmethod
+    def find_projectUsers(cls, projectid):
+        SQL = """
+        SELECT user_info.* FROM user_info
+        JOIN user_project ON user_project.userid = user_info.id
+        JOIN project ON project.id = user_project.projectid
+        WHERE project.id=%s;
+        """
+        users = User.select_all_where(SQL, (projectid,))
+        if users is None:
+            return None
+        print(users)
+        return users
+
 
     def json(self):
         return {

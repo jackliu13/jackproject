@@ -71,7 +71,6 @@ UPDATE {tablename} SET {update_column_list} WHERE id=%s; """
             cur = conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
             cur.execute(SQL)
             rows = cur.fetchall()
-            print(rows)
             return [cls(**row) for row in rows]
 
     #USE when you need a more specific select_all statement (with inputed values)

@@ -18,7 +18,6 @@ export default class Browse extends React.Component {
   state = {
     items : [],
     subtitle : "Browse all projects from all users",
-    redirect_to_project: false
   };
 
 
@@ -28,19 +27,11 @@ export default class Browse extends React.Component {
 
     this.filter = this.filter.bind(this)
     this.browseAll = this.browseAll.bind(this)
-    this.viewProject = this.viewProject.bind(this)
   }
 
   // reloadItemList = () => {
   // }
 
-  viewProject = (projectid) => {
-    URL = "home/project/" + projectid;
-    this.setState({
-      redirect_to_project: {URL}
-    })
-
-  }
 
   componentDidMount(){
     const url = "http://127.0.0.1:5000/api/projects/all"
@@ -81,10 +72,11 @@ export default class Browse extends React.Component {
     })
     })
     promise.then(response=>response.json()).then(json=>{
-      console.log(json.projects)
+      console.log("data",json.projects)
       this.setState({
         items: json.projects
       });
+      console.log(this.state.items)
     }).catch(error=>console.log(error));
     this.setState({
       subtitle: "Browsing all projects that I have created..."
@@ -129,7 +121,7 @@ export default class Browse extends React.Component {
       <h1>Browse Projects</h1>
       <p>{this.state.subtitle}</p>
       <hr />
-      <BrowseProjectCollection items={this.state.items} onClick={this.viewProject} />
+      <BrowseProjectCollection items={this.state.items} />
       </Col>
       </Row>
 

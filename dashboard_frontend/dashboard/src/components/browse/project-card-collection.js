@@ -10,7 +10,7 @@ export default class BrowseProjectCollection extends Component {
 
     render() {
         const items = this.props.items.map((dict, index)=>
-            <BrowseProjectCard {...dict} key={index} onClick={this.props.onClick} />
+            <BrowseProjectCard {...dict} key={index} />
         )
         const numberOfItems = items.length
 

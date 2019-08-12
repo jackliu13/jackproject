@@ -15,6 +15,7 @@ class User(ORM):
 
     def json(self):
         return {
+            "id": self.id,
             "username": self.username,
             "realname": self.realname,
         }
@@ -23,7 +24,14 @@ class User(ORM):
         self.password = bcrypt.hashpw(password.encode(), bcrypt.gensalt())
         return self.password
 
-
+    #User info return
+    @classmethod
+    def user_info(cls, id):
+        SQL = "SELECT * FROM user_info WHERE id=%s"
+        user = cls.select_one(SQL, (id,))
+        if user is None:
+            return None
+        return user
 
     #Login function
     @classmethod
