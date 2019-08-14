@@ -12,7 +12,6 @@ import {isLoggedIn} from '../../services/logged-in.js';
 import BrowseProjectCollection from './project-card-collection.js';
 import './Browse.css'
 
-
 export default class Browse extends React.Component {
 
   state = {
