@@ -54,6 +54,7 @@ def build_user():
                 username VARCHAR UNIQUE NOT NULL,
                 password VARCHAR NOT NULL,
                 realname VARCHAR NOT NULL,
+                email VARCHAR NOT NULL,
                 PRIMARY KEY (id)
                 )''')
 # FOREIGN KEY (id) REFERENCES project (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION

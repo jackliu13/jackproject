@@ -11,9 +11,7 @@ class UserProject(ORM):
         self.userid = kwargs.get('userid')
         self.projectid = kwargs.get('projectid')
         self.userrole = kwargs.get('userrole') #Array / List of roles
-        # self.tags = kwargs.get('tags') #Potentially a dictionary
         # self.creationdate = kwargs.get('creationdate')
-        # self.api_key = kwargs.get('api_key',self.generate_api_key())
 
     @classmethod
     def find_projectUsers(cls, projectid):

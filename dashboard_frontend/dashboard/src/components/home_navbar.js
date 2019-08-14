@@ -10,6 +10,8 @@ import Dropdown from 'react-bootstrap/Dropdown'
 
 import NavDropdown from './home_navbar_dropdown.js'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 
 
@@ -30,7 +32,11 @@ export default class Home_Nav extends React.Component{
             <button className="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#navbar">
                 <span className="navbar-toggler-icon"></span>
             </button>
-            <a href="/home" className="navbar-brand d-flex w-50 mr-auto">Name</a>
+            <a href="/home" className="navbar-brand d-flex w-50 mr-auto">
+
+              <FontAwesomeIcon icon="puzzle-piece" className="icon-logo" size="lg" />
+              <div className="text-logo">Jigsaw</div>
+            </a>
             <div className="navbar-collapse collapse w-100" id="navbar">
                 <ul className="navbar-nav w-100 justify-content-center d-flex flex-fill">
                     <li className="nav-item">
@@ -66,7 +72,11 @@ export default class Home_Nav extends React.Component{
             <button className="navbar-toggler mr-2" type="button" data-toggle="collapse" data-target="#navbar">
                 <span className="navbar-toggler-icon"></span>
             </button>
-            <a href="/home" className="navbar-brand d-flex w-50 mr-auto">Name</a>
+            <a href="/home" className="navbar-brand d-flex w-50 mr-auto">
+
+              <FontAwesomeIcon icon="puzzle-piece" className="icon-logo" size="lg" />
+              <div className="text-logo">Jigsaw</div>
+            </a>
             <div className="navbar-collapse collapse w-100" id="navbar">
                 <ul className="navbar-nav w-100 justify-content-center d-flex flex-fill">
                     <li className="nav-item">

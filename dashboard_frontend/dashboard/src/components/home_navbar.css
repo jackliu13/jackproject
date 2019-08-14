@@ -1,7 +1,7 @@
 .individual-link {
   color: #484646 !important;
-  color: white !important;
-  font-weight: bold !important;
+  color: black !important;
+  /* font-weight: bold !important; */
 }
 
 .nav-link:hover {
@@ -35,4 +35,19 @@
   background: linear-gradient(45deg, #614385, #516395);
   background: linear-gradient(45deg, #DD5E89, #F7BB97);
   background: none; */
+  /* border-bottom-color: black !important;
+  border-bottom-width: 5px !important; */
+}
+
+.navbar-brand {
+  padding-left: 50px;
+}
+
+.text-logo {
+  padding-left: 5px;
+  font-weight: bold;
+}
+
+.icon-logo {
+  color: #800080;
 }

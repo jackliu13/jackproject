@@ -47,7 +47,7 @@ export default class Landing extends React.Component {
       <b>
       <h1> Collaborate on <u>awesome</u> projects with <i>diverse</i> skillsets </h1>
       </b>
-      <p> [...] is a platform to upload and share side projects and find others who are just
+      <p> Jigsaw is a platform to upload and share side projects and find others who are just
       as passionate as you to collaborate with. Find artists, designers, programmers, testers,
       and more here.
       </p>
@@ -66,7 +66,7 @@ export default class Landing extends React.Component {
         />
       </Figure>
       </center>
-      
+
       </Row>
 
 

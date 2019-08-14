@@ -1,0 +1,59 @@
+
+form {
+  color: gray;
+  font-size: 13px;
+}
+
+h2 {
+  text-align: center;
+}
+
+
+label {
+  display: flex;
+  font-weight: 600;
+}
+
+.Register form button.testbutton {
+  padding: 5px 5px;
+  width: 35%;
+  justify-content: flex-end;
+  background-color: #7b68ee;
+  border-radius: 3px;
+  border-color: #7b68ee;
+  color: white;
+  font-weight: bold;
+}
+
+.Register form button.testbutton:enabled:hover {
+  border: none;
+  background-color: #7b68ee;
+}
+
+.Register form button.testbutton:active:hover {
+  background-color: #7b68ee;
+}
+
+.Register form button.testbutton:active:focus {
+  background-color: #7b68ee;
+}
+
+
+
+.Register {
+  padding: 60px 0;
+
+}
+
+.Register form {
+  margin: 0 auto;
+  max-width: 500px;
+}
+
+.Register form h1 {
+  text-align: center;
+}
+
+a {
+  color: gray;
+}

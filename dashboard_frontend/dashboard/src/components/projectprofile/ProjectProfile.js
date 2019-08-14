@@ -88,7 +88,6 @@ export default class ProjectProfile extends React.Component {
       this.setState({
         users: json2.users
       });
-      console.log("USERS", this.state.users)
     }).catch(error=>console.log(error));
   }
 

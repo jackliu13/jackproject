@@ -24,8 +24,14 @@ class Project(ORM):
 
     #Add a user to a project
     def addUser(self, userid, role):
-        new_user_project = UserProject(userid=userid, projectid=self.id, userrole=[role])
-        new_user_project.save()
+        SQL = "SELECT * FROM user_project WHERE projectid=%s AND userid=%s"
+        find_existing = UserProject.select_one(SQL, (self.id, userid))
+        if find_existing is not None:
+            find_existing.userrole.append(role)
+            find_existing.save()
+        else:
+            new_user_project = UserProject(userid=userid, projectid=self.id, userrole=[role])
+            new_user_project.save()
 
     @classmethod
     def all_projects(cls):
@@ -45,7 +51,6 @@ class Project(ORM):
         project = cls.select_one(SQL, (id,))
         if project is None:
             return None
-        print(project)
         return project
 
     def json(self):

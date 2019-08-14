@@ -37,6 +37,7 @@ export default class NewRecruitForm extends React.Component {
 
   handleSubmit = event => {
     const url = "http://127.0.0.1:5000/api/recruit/create-recruit"
+    console.log(this.props.projectid)
     const promise = fetch(url, {
       method: 'post',
       mode: 'cors',

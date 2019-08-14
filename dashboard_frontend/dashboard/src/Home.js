@@ -12,6 +12,7 @@ import Col from 'react-bootstrap/Col';
 import HomeNav from './components/home_navbar.js';
 
 import Login_Menu from './components/login/login_menu.js'
+import Register_Menu from './components/login/register_menu.js'
 import Browse from './components/browse/Browse.js'
 import UploadProject from './components/uploadproject/UploadProject.js'
 import UserProfile from './components/userprofile/UserProfile.js'
@@ -30,6 +31,7 @@ class Home extends React.Component {
         <Route exact path = "/home" render={(props) => <Landing{...props}/>}/>
         <Route path = "/home/browse" render={(props) => <Browse{...props}/>}/>
         <Route path = "/home/login" render={(props) => <Login_Menu{...props}/>}/>
+        <Route path = "/home/register" render={(props) => <Register_Menu{...props}/>}/>
         <Route path = "/home/upload" render={(props) => <UploadProject{...props}/>}/>
         <Route path = "/home/profile/:userid" render={(props) => <UserProfile{...props}/>}/>
         <Route path = "/home/project/:projectid" render={(props) => <ProjectProfile{...props}/>}/>

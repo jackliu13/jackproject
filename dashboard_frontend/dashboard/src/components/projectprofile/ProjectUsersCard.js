@@ -26,8 +26,8 @@ export default class ProjectUsersCard extends React.Component {
     let USER_PAGE = "/home/profile/" + this.props.id
 
     return (
+      <>
       <Container>
-
       <Row>
       <Col md={2} className="sidebar">
       <h3><center> {this.props.realname}</center></h3>
@@ -48,6 +48,8 @@ export default class ProjectUsersCard extends React.Component {
       </Col>
       </Row>
       </Container>
+      <br /><br />
+      </>
     )
 }
 }

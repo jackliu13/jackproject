@@ -1,0 +1,20 @@
+.goBack {
+  background-color: transparent !important;
+  color: black !important;
+  border: none !important;
+}
+.check {
+  background-color: transparent !important;
+  color: green !important;
+  border: none !important;
+}
+
+.reject {
+  background-color: transparent !important;
+  color: red !important;
+  border: none !important;
+}
+
+.listing-individual-row:hover {
+  background-color: transparent !important;
+}

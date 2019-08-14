@@ -56,3 +56,7 @@ label {
 .Login form h1 {
   text-align: center;
 }
+
+a {
+  color: gray;
+}

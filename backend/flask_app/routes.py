@@ -12,6 +12,17 @@ from model.recruit_request import RecruitRequest
 # USER MANAGEMENT
 ############################################
 
+#Register an account
+@app.route("/api/register", methods=["POST"])
+def web_register():
+    if not request.json or "username" not in request.json or 'password' not in request.json or 'email' not in request.json or 'realname' not in request.json:
+        return jsonify({"error": "account creation missing valid inputs"}), 400
+    print(request.json['realname'])
+    user = User(username=request.json['username'],password=request.json['password'], email=request.json['email'], realname=request.json['realname'])
+    user.save()
+    return jsonify({"register": "success"})
+
+
 #Verify's user login
 @app.route("/api/login", methods=["POST"])
 def web_login():
@@ -126,6 +137,23 @@ def find_recruits_request():
     if not request.json or "recruitid" not in request.json:
         return jsonify({"error": "find recruit-rquest module is missing valid input"}), 400
     return jsonify({"recruitrequests":[item.json_with_username() for item in RecruitRequest.requests_for_recruit(request.json['recruitid'])]})
+
+
+#Accept a request and add the user to the project
+@app.route('/api/project/recruit-requests/accept', methods=["POST"])
+def accept_recruits_request():
+    if not request.json or "recruitrequestid" not in request.json:
+        return jsonify({"error": "accept recruit-request module is missing valid input"}), 400
+    RecruitRequest.accept(request.json['recruitrequestid'])
+    return jsonify({"accept_recruitrequests":"Done"})
+
+#Reject a recruit request
+@app.route('/api/project/recruit-requests/reject', methods=["POST"])
+def reject_recruits_request():
+    if not request.json or "recruitrequestid" not in request.json:
+        return jsonify({"error": "reject recruit-request module is missing valid input"}), 400
+    RecruitRequest.reject(request.json['recruitrequestid'])
+    return jsonify({"reject_recruitrequests":"Done"})
 
 
 ############################################

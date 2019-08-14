@@ -3,7 +3,7 @@ import bcrypt
 
 class User(ORM):
 
-    fields = ['username', 'password', 'realname']
+    fields = ['username', 'password', 'realname', 'email']
     dbtable = "user_info"
 
     def __init__(self, **kwargs):
@@ -16,6 +16,7 @@ class User(ORM):
     def json(self):
         return {
             "id": self.id,
+            "email": self.email,
             "username": self.username,
             "realname": self.realname,
         }

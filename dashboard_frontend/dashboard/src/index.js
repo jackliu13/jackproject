@@ -4,6 +4,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCheckSquare, faPlus, faArrowLeft, faCheck, faTimes, faPuzzlePiece } from '@fortawesome/free-solid-svg-icons';
+
+library.add(faCheckSquare, faPlus, faArrowLeft, faCheck, faTimes, faPuzzlePiece)
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 

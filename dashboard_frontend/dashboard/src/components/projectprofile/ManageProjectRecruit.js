@@ -16,6 +16,8 @@ import NewRecruitForm from './NewRecruitForm.js'
 import ProjectRecruitAdmin from './ProjectRecruitAdmin.js'
 import ProjectRecruitAdminIndividual from './ProjectRecruitAdminIndividual.js'
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 
 export default class ManageProjectRecruit extends React.Component {
 
@@ -29,6 +31,7 @@ export default class ManageProjectRecruit extends React.Component {
 
     this.hideModal = this.hideModal.bind(this)
     this.clickRecruitRow = this.clickRecruitRow.bind(this)
+    this.goBack = this.goBack.bind(this)
   }
 
   handleClick = event => {
@@ -47,7 +50,12 @@ export default class ManageProjectRecruit extends React.Component {
     this.setState({
       selectedRecruitID: id
     })
+  }
 
+  goBack(){
+    this.setState({
+      selectedRecruitID: ""
+    })
   }
 
   componentDidMount(){
@@ -81,7 +89,7 @@ export default class ManageProjectRecruit extends React.Component {
           </div>
         </Modal.Header>
         <Modal.Body>
-          <NewRecruitForm />
+          <NewRecruitForm projectid={this.props.projectid}/>
         </Modal.Body>
       </Modal>
 
@@ -95,12 +103,13 @@ export default class ManageProjectRecruit extends React.Component {
       <Col>
       <p> Listed are the current requests</p>
       </Col>
-      <Button onClick={() => this.handleClick()}>Add</Button>
+
+      <Button onClick={() => this.handleClick()}><FontAwesomeIcon icon="plus" /> Add New</Button>
       </Row>
       <hr />
       {
           this.state.selectedRecruitID ?
-          <ProjectRecruitAdminIndividual selectedId={this.state.selectedRecruitID} />
+          <ProjectRecruitAdminIndividual selectedId={this.state.selectedRecruitID} goBack={this.goBack}/>
           : <ProjectRecruitAdmin items={this.state.recruitObjects} clickRow={this.clickRecruitRow} />
 
       }

@@ -98,21 +98,30 @@ UPDATE {tablename} SET {update_column_list} WHERE id=%s; """
     #         rows = cur.fetchall()
     #         return [cls(**row) for row in rows]
     #
-    # @classmethod
-    # def from_id(cls, id):
-    #     return cls.one_where("id=?", (id,))
+    @classmethod
+    def from_id(cls, id):
+        SQL = "SELECT * FROM {tablename} WHERE id=%s"
+        with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
+                              port = "5432", database = "database") as conn:
+            cur = conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
+            cur.execute(SQL.format(tablename=cls.dbtable), (id,))
+            row = cur.fetchone()
+            if row is None:
+                return None
+            return cls(**row)
     #
     # @classmethod
     # def all(cls):
     #     """ return a list of every row in the table as instances of the class """
     #     return cls.many_where()
     #
-    # def delete(self):
-    #     SQL = "DELETE FROM {tablename} WHERE id=?"
-    #     with sqlite3.connect(self.dbpath) as conn:
-    #         cur = conn.cursor()
-    #         cur.execute(SQL.format(tablename=self.dbtable), (self.id,))
-    #         self.id = None
+    def delete(self):
+        SQL = "DELETE FROM {tablename} WHERE id=%s"
+        with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
+                              port = "5432", database = "database") as conn:
+            cur = conn.cursor()
+            cur.execute(SQL.format(tablename=self.dbtable), (self.id,))
+            self.id = None
     #
     # def __repr__(self):
     #     reprstring = "<{cname} {fieldvals}>"

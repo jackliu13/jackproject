@@ -7,6 +7,7 @@ import Label from "react-bootstrap/Form";
 import FormGroup from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import ControlLabel from "react-bootstrap/FormControl";
+import InputGroup from 'react-bootstrap/InputGroup';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -14,20 +15,22 @@ import Col from 'react-bootstrap/Col';
 
 import {isLoggedIn} from '../../services/logged-in.js';
 
-import "./login_menu.css";
+import "./register_menu.css";
 
-export default class Login_Menu extends Component {
+export default class Register_Menu extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      username: "",
+      realname: ""
     };
   }
 
   validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
+    return this.state.email.length > 0 && this.state.password.length > 0 && this.state.realname.length > 0 && this.state.username.length > 0;
   }
 
   handleChange = event => {
@@ -37,8 +40,9 @@ export default class Login_Menu extends Component {
   }
 
   handleSubmit = event => {
+    console.log(this.state.fullname)
     event.preventDefault();
-    const url = "http://127.0.0.1:5000/api/login"
+    const url = "http://127.0.0.1:5000/api/register"
     const promise = fetch(url,{
     method: "post",
     mode: "cors",
@@ -47,8 +51,11 @@ export default class Login_Menu extends Component {
 
     },
     body: JSON.stringify({
-      username : this.state.email,
-      password : this.state.password
+      username : this.state.username,
+      password : this.state.password,
+      email: this.state.email,
+      realname: this.state.realname
+
     })
     })
     promise.then(blob => blob.json()).then(json => {
@@ -79,25 +86,56 @@ export default class Login_Menu extends Component {
     }
 
     return (
-      <div className="Login">
+      <div className="Register">
 
         <form onSubmit={this.handleSubmit}>
-          <h1> Login </h1>
+          <h1> Register </h1>
           <hr />
-          <Form.Group controlId="email" bsSize="large">
+          <Form.Group controlId="username" bsSize="large">
+            <Label>Username</Label>
+            <InputGroup>
+              <InputGroup.Prepend>
+                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+              </InputGroup.Prepend>
+              <FormControl
+                autoFocus
+                id="username"
+                placeholder="Enter your username..."
+                value={this.state.username}
+                onChange={this.handleChange}
+              />
+            </InputGroup>
+
+          </Form.Group>
+          <Form.Group controlId="fullname" bsSize="large">
+            <Row>
+            <Col>
+            <Label>Full Name</Label>
+            <FormControl
+              autoFocus
+              id="realname"
+              placeholder="Enter your full name..."
+              value={this.state.realname}
+              onChange={this.handleChange}
+            />
+            </Col>
+            <Col>
             <Label>Email</Label>
             <FormControl
               autoFocus
               id="email"
+              type="email"
               placeholder="Enter your email..."
               value={this.state.email}
               onChange={this.handleChange}
             />
+            </Col>
+            </Row>
           </Form.Group>
           <Form.Group controlId="password" bsSize="large">
             <Label>Password</Label>
             <FormControl
-              placeholder="Enter your password..."
+              placeholder="Enter a secure password..."
               value={this.state.password}
               onChange={this.handleChange}
               type="password"
@@ -112,10 +150,10 @@ export default class Login_Menu extends Component {
             disabled={!this.validateForm()}
             type="submit"
           >
-            Login
+            Register
           </Button>
           <hr />
-          <p>Need an account? Sign up <b><a href="/home/register">here</a></b></p>
+          <p>Already have an account? Login <b><a href="/home/login">here</a></b></p>
           </center>
         </form>
       </div>
