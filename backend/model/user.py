@@ -33,6 +33,15 @@ class User(ORM):
             return None
         return user
 
+    # #Username return based on id
+    # @classmethod
+    # def user_info_username(cls, id):
+    #     SQL = "SELECT * FROM user_info WHERE id=%s"
+    #     user = cls.select_one(SQL, (id,))
+    #     if user is None:
+    #         return None
+    #     return user.username
+
     #Login function
     @classmethod
     def login(cls, username, password):

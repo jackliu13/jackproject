@@ -16,6 +16,7 @@ import ModalTitle from 'react-bootstrap/ModalTitle'
 import ModalBody from 'react-bootstrap/ModalBody'
 
 import ProjectRecruit from './ProjectRecruit.js';
+import ProjectRecruitApply from './ProjectRecruitApply.js'
 
 import './ProjectOverview.css';
 
@@ -24,22 +25,53 @@ export default class ProjectOverview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showModal: false
+      showModal: false,
+      recruitObjects: [],
+      showRecruitModal: true,
+      selectedRecruitID : ""
     };
 
     this.hideModal = this.hideModal.bind(this)
+    this.clickRecruitRow = this.clickRecruitRow.bind(this)
   }
 
   handleClick = event => {
-    this.setState({
-      showModal: true,
-    });
+    const url = "http://127.0.0.1:5000/api/project/recruits"
+    const promise = fetch(url,{
+    method: "post",
+    mode: "cors",
+    headers:{
+      "content-type" : "application/json"
+
+    },
+    body: JSON.stringify({
+      projectid: this.props.projectid
+    })
+    })
+    promise.then(response=>response.json()).then(json=>{
+      this.setState({
+        recruitObjects: json.recruits
+      });
+      this.setState({
+        showModal: true,
+      });
+    }).catch(error=>console.log(error));
   }
 
   hideModal(){
     this.setState({
       showModal: false,
+      showRecruitModal: true,
+      selectedRecruitID: ""
     });
+  }
+
+
+  clickRecruitRow = (id) => {
+    this.setState({
+      showRecruitModal: false,
+      selectedRecruitID: id
+    })
   }
 
 
@@ -66,12 +98,17 @@ export default class ProjectOverview extends React.Component {
       <Modal dialogClassName="project_recruit_modal" show={this.state.showModal} onHide={this.hideModal} size="lg">
         <Modal.Header closeButton>
           <div>
-          <h3> Become apart of the project </h3>
-          <p><i>Here are the available roles for this project</i></p>
+          <h4> Become apart of the project </h4>
+          <p><i>Here are the current available roles for this project</i></p>
           </div>
         </Modal.Header>
         <Modal.Body>
-          <ProjectRecruit />
+          {
+              this.state.showRecruitModal ?
+              <ProjectRecruit items={this.state.recruitObjects} clickRow={this.clickRecruitRow} />
+              : <ProjectRecruitApply recruitid={this.state.selectedRecruitID}/>
+          }
+
         </Modal.Body>
       </Modal>
 

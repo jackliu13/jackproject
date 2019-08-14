@@ -1,7 +1,7 @@
 import React from 'react';
 
-export function isLoggedIn(props) {
-  if window.sessionStorage.getItem("user_id") === props.projectid {
+export function isProjectOwner(owner) {
+  if (window.sessionStorage.getItem("user_id") === owner) {
     return (
       true
     )

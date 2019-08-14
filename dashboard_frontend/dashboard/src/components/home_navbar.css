@@ -1,5 +1,7 @@
 .individual-link {
   color: #484646 !important;
+  color: white !important;
+  font-weight: bold !important;
 }
 
 .nav-link:hover {
@@ -15,7 +17,7 @@
 #navbar-link-id {
   color: #484646;
   font-style: bold;
-  font-weight: bold;
+  font-weight: bold !important;
   padding: 5px 5px;
   text-decoration:none;
 }
@@ -23,4 +25,14 @@
 .nav-link-login:hover {
   background-color: #DAD1CF;
   border-radius: 2px;
+}
+
+.navbar {
+  /* background: linear-gradient(45deg, #EC6F66, #F3A183);
+  background: linear-gradient(45deg, #ED4264, #FFEDBC);
+  background: linear-gradient(45deg, #DC2424, #4A569D);
+
+  background: linear-gradient(45deg, #614385, #516395);
+  background: linear-gradient(45deg, #DD5E89, #F7BB97);
+  background: none; */
 }

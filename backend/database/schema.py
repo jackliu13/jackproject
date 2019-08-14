@@ -90,13 +90,41 @@ def build_user_project():
                 FOREIGN KEY (projectId) REFERENCES project(id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
                 )''')
 
-# def build_trades():
-#     with sqlite3.connect("trader.db") as conn:
-#         cur = conn.cursor()
-#         cur.execute("DROP TABLE IF EXISTS trades;")
-#         cur.execute(Trade.create_sql)
+def build_recruit():
+    with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
+                          port = "5432", database = "database") as conn:
+        cur = conn.cursor()
+        cur.execute("DROP TABLE IF EXISTS recruit CASCADE;")
+        cur.execute('''
+            CREATE TABLE recruit(
+                id uuid DEFAULT uuid_generate_v4(),
+                projectid uuid,
+                role VARCHAR NOT NULL,
+                description VARCHAR,
+                PRIMARY KEY (id),
+                FOREIGN KEY (projectId) REFERENCES project(id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
+                )''')
+
+def build_recruit_request():
+    with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
+                          port = "5432", database = "database") as conn:
+        cur = conn.cursor()
+        cur.execute("DROP TABLE IF EXISTS recruit_request CASCADE;")
+        cur.execute('''
+            CREATE TABLE recruit_request(
+                id uuid DEFAULT uuid_generate_v4(),
+                recruitid uuid,
+                userid uuid,
+                message VARCHAR,
+                status VARCHAR NOT NULL,
+                PRIMARY KEY (id),
+                FOREIGN KEY (userid) REFERENCES user_info(id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION,
+                FOREIGN KEY (recruitid) REFERENCES recruit(id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
+                )''')
 
 if __name__ == '__main__':
     build_user()
     build_project()
     build_user_project()
+    build_recruit()
+    build_recruit_request()

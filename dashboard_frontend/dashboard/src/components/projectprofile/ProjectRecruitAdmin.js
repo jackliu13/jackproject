@@ -11,7 +11,7 @@ import Badge from 'react-bootstrap/Badge';
 
 import './ProjectRecruit.css'
 
-export default class ProjectRecruit extends React.Component {
+export default class ProjectRecruitAdmin extends React.Component {
 
   state = {
   };

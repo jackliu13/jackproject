@@ -15,6 +15,11 @@ import NavDropdown from './home_navbar_dropdown.js'
 
 export default class Home_Nav extends React.Component{
 
+
+  handleClick = event => {
+    window.sessionStorage.clear()
+  }
+
   render(){
 
     if (isLoggedIn()){
@@ -45,7 +50,7 @@ export default class Home_Nav extends React.Component{
                    <a className="dropdown-item" href={profileURL}>Profile</a>
                    <a className="dropdown-item" href="/">Projects</a>
                    <div className="dropdown-divider"></div>
-                   <a className="dropdown-item" href="/">Logout</a>
+                   <a className="dropdown-item" href="/home" onClick={() => this.handleClick()}>Logout</a>
 
                  </NavDropdown>
 

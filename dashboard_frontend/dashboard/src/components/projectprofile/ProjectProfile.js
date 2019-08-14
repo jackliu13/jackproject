@@ -8,15 +8,17 @@ import Col from 'react-bootstrap/Col';
 
 import ListGroup from 'react-bootstrap/ListGroup'
 import Button from "react-bootstrap/Button";
-
 import Figure from 'react-bootstrap/Figure';
 
 import './ProjectProfile.css';
 
 import ProjectOverview from './ProjectOverview.js';
 import ProjectUsers from './ProjectUsers.js';
+import ManageProjectRecruit from './ManageProjectRecruit.js'
 
 import BrowseProjectCollection from '../browse/project-card-collection.js';
+
+import {isProjectOwner} from '../../services/user-project-verification.js'
 
 export default class ProjectProfile extends React.Component {
 
@@ -95,11 +97,13 @@ export default class ProjectProfile extends React.Component {
   render() {
     let tab = <h1> Error loading container... </h1>
     if (this.state.selectedTab === 'Overview'){
-      tab = <ProjectOverview title={this.state.items.title} description={this.state.items.description} tags={this.state.items.tags} />
+      tab = <ProjectOverview projectid={this.props.match.params.projectid} title={this.state.items.title} description={this.state.items.description} tags={this.state.items.tags} />
     }
     else if (this.state.selectedTab === 'People'){
       tab = <ProjectUsers users={this.state.users} />
-
+    }
+    else if (this.state.selectedTab === 'ManageProjectRecruit'){
+      tab = <ManageProjectRecruit projectid={this.props.match.params.projectid}/>
     }
 
 
@@ -114,6 +118,20 @@ export default class ProjectProfile extends React.Component {
         <ListGroup.Item action onClick={() => {this.changeTab('People')}}>People</ListGroup.Item>
         <ListGroup.Item action onClick={() => {this.changeTab('Feedback')}}>Feedback</ListGroup.Item>
       </ListGroup>
+
+      <br />
+      {
+        isProjectOwner(this.state.items.owner) ?
+        <>
+        <p><b> Manage Project </b></p>
+        <ListGroup variant="flush">
+          <ListGroup.Item action onClick={() => {this.changeTab('ManageProjectRecruit')}}>Recruit Users </ListGroup.Item>
+          <ListGroup.Item action onClick={this.filter}>Dashboard</ListGroup.Item>
+        </ListGroup>
+        </>
+        : null
+      }
+
       </Col>
       <Col>
         {tab}

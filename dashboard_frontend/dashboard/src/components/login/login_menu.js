@@ -75,6 +75,7 @@ export default class Login_Menu extends Component {
 
   render() {
     if (isLoggedIn()){
+      this.forceUpdate()
       return <Redirect to="/home/browse" />
     }
 

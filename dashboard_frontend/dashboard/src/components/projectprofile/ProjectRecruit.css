@@ -1,0 +1,7 @@
+.listing-row {
+  cursor: pointer;
+}
+
+.listing-row:hover {
+  background-color: #ffe9e1 !important;
+}
