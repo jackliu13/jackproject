@@ -12,6 +12,8 @@ import ControlLabel from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Badge from 'react-bootstrap/Badge';
 
+import {BASE_URL} from '../../services/database-config.js';
+
 
 export default class ProjectRecruitApply extends React.Component {
 
@@ -35,7 +37,7 @@ export default class ProjectRecruitApply extends React.Component {
   }
 
   handleSubmit = event => {
-    const url = "http://127.0.0.1:5000/api/recruit/create-recruit-request"
+    const url = BASE_URL + "/api/recruit/create-recruit-request"
     const promise = fetch(url, {
       method: 'post',
       mode: 'cors',

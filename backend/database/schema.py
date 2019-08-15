@@ -72,6 +72,8 @@ def build_project():
                 title VARCHAR NOT NULL,
                 description VARCHAR,
                 tags TEXT [],
+                category VARCHAR,
+                updates VARCHAR [],
                 PRIMARY KEY (id)
                 )''')
 

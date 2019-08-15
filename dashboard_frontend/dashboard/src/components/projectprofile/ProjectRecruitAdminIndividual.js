@@ -9,10 +9,10 @@ import Table from 'react-bootstrap/Table'
 import Button from "react-bootstrap/Button";
 import Badge from 'react-bootstrap/Badge';
 
-import './ProjectRecruitAdminIndividual.css'
+import './ProjectRecruitAdminIndividual.css';
 
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {BASE_URL} from '../../services/database-config.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default class ProjectRecruitAdminIndividual extends React.Component {
 
@@ -37,7 +37,7 @@ export default class ProjectRecruitAdminIndividual extends React.Component {
   // }
 
   findRecruitRequests(){
-    const url = "http://127.0.0.1:5000/api/project/recruit-requests"
+    const url = BASE_URL + "/api/project/recruit-requests"
     const promise = fetch(url,{
     method: "post",
     mode: "cors",
@@ -57,7 +57,7 @@ export default class ProjectRecruitAdminIndividual extends React.Component {
 
   acceptRequest = (id) => {
     console.log(id)
-    const url = "http://127.0.0.1:5000/api/project/recruit-requests/accept"
+    const url = BASE_URL + "/api/project/recruit-requests/accept"
     const promise = fetch(url,{
     method: "post",
     mode: "cors",
@@ -74,7 +74,7 @@ export default class ProjectRecruitAdminIndividual extends React.Component {
   }
 
   rejectRequest = (id) => {
-    const url = "http://127.0.0.1:5000/api/project/recruit-requests/accept"
+    const url = BASE_URL + "/api/project/recruit-requests/accept"
     const promise = fetch(url,{
     method: "post",
     mode: "cors",

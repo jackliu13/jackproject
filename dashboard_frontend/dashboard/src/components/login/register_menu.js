@@ -14,6 +14,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import {isLoggedIn} from '../../services/logged-in.js';
+import {BASE_URL} from '../../services/database-config.js'
 
 import "./register_menu.css";
 
@@ -42,7 +43,7 @@ export default class Register_Menu extends Component {
   handleSubmit = event => {
     console.log(this.state.fullname)
     event.preventDefault();
-    const url = "http://127.0.0.1:5000/api/register"
+    const url = BASE_URL + "/api/register"
     const promise = fetch(url,{
     method: "post",
     mode: "cors",

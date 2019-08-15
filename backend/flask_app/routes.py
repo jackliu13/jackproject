@@ -33,7 +33,8 @@ def web_login():
     user = User.login(username,password)
     if user is not None:
         return jsonify({
-        "id": user.id
+        "id": user.id,
+        "username": user.username
         })
     return jsonify({"error": "no user found"})
 
@@ -80,7 +81,9 @@ def create_project():
     a json POST request """
     if not request.json or "title" not in request.json or 'description' not in request.json or 'owner' not in request.json:
         return jsonify({"error": "new project is missing valid input"}), 400
-    project = Project(title=request.json['title'], description= request.json['description'], owner= request.json['owner'])
+    project = Project(title=request.json['title'], description= request.json['description'], owner= request.json['owner'], updates=[])
+    if "category" in request.json:
+        project.category = request.json['category']
     project.save()
     project.addUser(request.json['owner'], "Owner")
     if "tags" in request.json:
@@ -100,6 +103,39 @@ def project_users():
     if users is not None:
         return jsonify({"users":[item.json() for item in users]})
     return jsonify({"error": "invalid project id"})
+
+#Search projects based on category
+@app.route("/api/projects/search/category", methods=["POST"])
+def search_project_category():
+    if not request.json or "category" not in request.json:
+        return jsonify({"error": "search is missing valid input"}), 400
+    return jsonify({"projects":[item.json() for item in Project.search_projects_byCategory(request.json['category'])]})
+
+#Search projects based on tag
+@app.route("/api/projects/search/tag", methods=["POST"])
+def search_project_tag():
+    if not request.json or "tag" not in request.json:
+        return jsonify({"error": "search is missing valid input"}), 400
+    return jsonify({"projects":[item.json() for item in Project.search_projects_byTag(request.json['tag'])]})
+
+# Returns all projects where user is owner
+@app.route("/api/projects/isOwner", methods=["POST"])
+def select_project_fromowner():
+    if not request.json or "ownerid" not in request.json:
+        return jsonify({"error": "new project is missing valid input"}), 400
+    return jsonify({"projects":[item.json() for item in Project.projects_ownedBy(request.json['ownerid'])]})
+
+#Modify project information
+@app.route("/api/project/modify", methods=["POST"])
+def modify_project():
+    if not request.json or "projectid" not in request.json:
+        return jsonify({"error": "projectid is missing valid input"}), 400
+    project = Project.from_id(request.json["projectid"])
+    if "updates" in request.json:
+        project.updates.append(request.json["updates"])
+    project.save()
+    return jsonify({"projects":"success"})
+
 
 ############################################
 # RECRUIT MANAGEMENT

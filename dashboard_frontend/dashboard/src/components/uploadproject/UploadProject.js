@@ -9,6 +9,8 @@ import Col from 'react-bootstrap/Col';
 
 import {isLoggedIn} from '../../services/logged-in.js';
 
+import Stepper from '../utilities/stepper.js';
+
 import UploadProjectForm from './upload-project-form.js'
 
 export default class UploadProject extends React.Component {
@@ -29,8 +31,10 @@ export default class UploadProject extends React.Component {
     if (isLoggedIn()){
       return (
         <div>
-        <h2><center> Upload your project! </center></h2>
+        <h2><center> Upload your project </center></h2>
+        <center><Stepper /></center>
         <p><center> Create & Build your project profile</center></p>
+        <hr />
         <UploadProjectForm />
         </div>
       )

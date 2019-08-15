@@ -39,26 +39,28 @@ export default class Home_Nav extends React.Component{
             </a>
             <div className="navbar-collapse collapse w-100" id="navbar">
                 <ul className="navbar-nav w-100 justify-content-center d-flex flex-fill">
-                    <li className="nav-item">
-                        <a className="nav-link individual-link" href="/home/browse">Browse</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link individual-link" href="/home/upload">Upload</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link individual-link" href="/home/profile">Profile</a>
-                    </li>
+
+
                 </ul>
                 <ul className="navbar-nav w-100 justify-content-end d-flex">
-                <NavDropdown name="Second user">
-                  <div className="dropdown-header"> Test</div>
+                  <li className="nav-item">
+                      <a className="nav-link individual-link" href="/home/browse">Browse Projects</a>
+                  </li>
+                  <li className="nav-item">
+                      <a className="nav-link individual-link" href="/home/upload">Upload</a>
+                  </li>
+                  <li className="nav-item disabled dividerItem">
+                    <div class="divider-vertical" />
+                  </li>
+                  <NavDropdown className="profile-dropdown" name={window.sessionStorage.getItem('username')}>
+                    <div className="dropdown-header"> Manage</div>
 
-                   <a className="dropdown-item" href={profileURL}>Profile</a>
-                   <a className="dropdown-item" href="/">Projects</a>
-                   <div className="dropdown-divider"></div>
-                   <a className="dropdown-item" href="/home" onClick={() => this.handleClick()}>Logout</a>
+                     <a className="dropdown-item" href={profileURL}>Profile</a>
+                     <a className="dropdown-item" href="/">Settings</a>
+                     <div className="dropdown-divider"></div>
+                     <a className="dropdown-item logout" href="/home" onClick={() => this.handleClick()}>Logout</a>
 
-                 </NavDropdown>
+                   </NavDropdown>
 
                 </ul>
             </div>
@@ -79,19 +81,21 @@ export default class Home_Nav extends React.Component{
             </a>
             <div className="navbar-collapse collapse w-100" id="navbar">
                 <ul className="navbar-nav w-100 justify-content-center d-flex flex-fill">
-                    <li className="nav-item">
-                        <a className="nav-link individual-link" href="/home/browse">Browse</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link individual-link" href="/home/upload">Upload</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link individual-link" href="/home/profile">Profile</a>
-                    </li>
+
                 </ul>
+
                 <ul className="navbar-nav w-100 justify-content-end d-flex">
                     <li className="nav-item">
-                        <a className="nav-link-login" id="navbar-link-id" href="/home/login"> Login</a>
+                        <a className="nav-link individual-link" href="/home/browse">Browse Projects</a>
+                    </li>
+                    <li className="nav-item disabled dividerItem">
+                      <div class="divider-vertical" />
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link register-nav-link" id="navbar-link-id" href="/home/register"> Register</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link login-nav-link" id="navbar-link-id" href="/home/login"> Login</a>
                     </li>
                 </ul>
             </div>

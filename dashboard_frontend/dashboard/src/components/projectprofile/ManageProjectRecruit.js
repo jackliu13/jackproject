@@ -12,11 +12,12 @@ import Badge from 'react-bootstrap/Badge';
 
 import Modal from 'react-bootstrap/Modal';
 
-import NewRecruitForm from './NewRecruitForm.js'
-import ProjectRecruitAdmin from './ProjectRecruitAdmin.js'
-import ProjectRecruitAdminIndividual from './ProjectRecruitAdminIndividual.js'
+import NewRecruitForm from './NewRecruitForm.js';
+import ProjectRecruitAdmin from './ProjectRecruitAdmin.js';
+import ProjectRecruitAdminIndividual from './ProjectRecruitAdminIndividual.js';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {BASE_URL} from '../../services/database-config.js';
 
 
 export default class ManageProjectRecruit extends React.Component {
@@ -59,7 +60,7 @@ export default class ManageProjectRecruit extends React.Component {
   }
 
   componentDidMount(){
-    const url = "http://127.0.0.1:5000/api/project/recruits"
+    const url = BASE_URL + "/api/project/recruits"
     const promise = fetch(url,{
     method: "post",
     mode: "cors",
@@ -89,7 +90,7 @@ export default class ManageProjectRecruit extends React.Component {
           </div>
         </Modal.Header>
         <Modal.Body>
-          <NewRecruitForm projectid={this.props.projectid}/>
+          <NewRecruitForm projectid={this.props.projectid} />
         </Modal.Body>
       </Modal>
 

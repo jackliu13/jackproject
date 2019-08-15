@@ -12,6 +12,8 @@ import ControlLabel from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
 import Badge from 'react-bootstrap/Badge';
 
+import {BASE_URL} from '../../services/database-config.js'
+
 
 export default class NewRecruitForm extends React.Component {
 
@@ -36,7 +38,7 @@ export default class NewRecruitForm extends React.Component {
   }
 
   handleSubmit = event => {
-    const url = "http://127.0.0.1:5000/api/recruit/create-recruit"
+    const url = BASE_URL + "/api/recruit/create-recruit"
     console.log(this.props.projectid)
     const promise = fetch(url, {
       method: 'post',
@@ -77,9 +79,6 @@ export default class NewRecruitForm extends React.Component {
               value={this.state.description}
               onChange={this.handleChange}
             />
-            // <Form.Text className="text-muted">
-            //   This description is a <b>brief</b> explanation about your project. You can add more later.
-            // </Form.Text>
           </Form.Group>
           <hr />
           <center>

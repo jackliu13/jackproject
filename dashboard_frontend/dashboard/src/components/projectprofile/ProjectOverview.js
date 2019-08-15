@@ -16,7 +16,9 @@ import ModalTitle from 'react-bootstrap/ModalTitle'
 import ModalBody from 'react-bootstrap/ModalBody'
 
 import ProjectRecruit from './ProjectRecruit.js';
-import ProjectRecruitApply from './ProjectRecruitApply.js'
+import ProjectRecruitApply from './ProjectRecruitApply.js';
+
+import {BASE_URL} from '../../services/database-config.js';
 
 import './ProjectOverview.css';
 
@@ -36,7 +38,7 @@ export default class ProjectOverview extends React.Component {
   }
 
   handleClick = event => {
-    const url = "http://127.0.0.1:5000/api/project/recruits"
+    const url = BASE_URL + "/api/project/recruits"
     const promise = fetch(url,{
     method: "post",
     mode: "cors",
@@ -125,22 +127,14 @@ export default class ProjectOverview extends React.Component {
       {tags}
       <br />
       <br />
-      <b>Location: </b>
+      <b>Category: </b>
       <br />
-      New York City, NY
+      {this.props.category}
       </div>
       <hr />
-      <Row className="project-overview_button-row">
-      <Col>
-      <center>
-      <Button className="joinProject" block type="button" onClick={() => this.handleClick()}> Request to join the Project</Button>
       <br />
-      <h3><b>OR</b></h3>
-      <br />
-      <Button className="followProject" block type="button"> Follow Project</Button>
-      </center>
-      </Col>
-      </Row>
+      <Button className="joinProject" block type="button" onClick={() => this.handleClick()}> Request to join the project</Button>
+
       </>
     )
 

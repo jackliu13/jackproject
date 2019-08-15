@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
+import './ProjectUsersCard.css'
 
 
 export default class ProjectUsersCard extends React.Component {
@@ -36,9 +37,6 @@ export default class ProjectUsersCard extends React.Component {
       <Col>
       <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
         <Tab eventKey="overview" title="Overview">
-          <h1> Test </h1>
-        </Tab>
-        <Tab eventKey="projects" title="Contributions">
           <h1> Test </h1>
         </Tab>
         <Tab eventKey="contact" title="Contact" disabled>

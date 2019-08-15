@@ -14,11 +14,13 @@ import './ProjectProfile.css';
 
 import ProjectOverview from './ProjectOverview.js';
 import ProjectUsers from './ProjectUsers.js';
+import ProjectUpdates from './ProjectUpdates.js';
 import ManageProjectRecruit from './ManageProjectRecruit.js'
 
 import BrowseProjectCollection from '../browse/project-card-collection.js';
 
-import {isProjectOwner} from '../../services/user-project-verification.js'
+import {isProjectOwner} from '../../services/user-project-verification.js';
+import {BASE_URL} from '../../services/database-config.js';
 
 export default class ProjectProfile extends React.Component {
 
@@ -46,7 +48,7 @@ export default class ProjectProfile extends React.Component {
 
   componentDidMount(){
 
-    const url = "http://127.0.0.1:5000/api/project/select"
+    const url = BASE_URL + "/api/project/select"
     const promise = fetch(url,{
     method: "post",
     mode: "cors",
@@ -63,17 +65,16 @@ export default class ProjectProfile extends React.Component {
       this.setState({
         items: json.project
       });
+      console.log("full list", this.state.items)
     }).catch(error=>console.log(error));
 
     this.getUsers()
-
-
 
   }
 
 
   getUsers(){
-    const url_users = "http://127.0.0.1:5000/api/project/users"
+    const url_users = BASE_URL + "/api/project/users"
     const promise_users = fetch(url_users,{
     method: "post",
     mode: "cors",
@@ -93,13 +94,18 @@ export default class ProjectProfile extends React.Component {
 
 
 
+
+
   render() {
     let tab = <h1> Error loading container... </h1>
     if (this.state.selectedTab === 'Overview'){
-      tab = <ProjectOverview projectid={this.props.match.params.projectid} title={this.state.items.title} description={this.state.items.description} tags={this.state.items.tags} />
+      tab = <ProjectOverview projectid={this.props.match.params.projectid} title={this.state.items.title} description={this.state.items.description} tags={this.state.items.tags} category={this.state.items.category} />
     }
     else if (this.state.selectedTab === 'People'){
       tab = <ProjectUsers users={this.state.users} />
+    }
+    else if (this.state.selectedTab === 'Updates'){
+      tab = <ProjectUpdates updates={this.state.items.updates} owner={this.state.items.owner} projectid={this.props.match.params.projectid} />
     }
     else if (this.state.selectedTab === 'ManageProjectRecruit'){
       tab = <ManageProjectRecruit projectid={this.props.match.params.projectid}/>
@@ -115,7 +121,6 @@ export default class ProjectProfile extends React.Component {
         <ListGroup.Item action onClick={() => {this.changeTab('Overview')}}>Overview</ListGroup.Item>
         <ListGroup.Item action onClick={() => {this.changeTab('Updates')}}>Updates</ListGroup.Item>
         <ListGroup.Item action onClick={() => {this.changeTab('People')}}>People</ListGroup.Item>
-        <ListGroup.Item action onClick={() => {this.changeTab('Feedback')}}>Feedback</ListGroup.Item>
       </ListGroup>
 
       <br />

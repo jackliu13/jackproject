@@ -3,8 +3,9 @@
   width: 33vw;
   height: 33vh;
   box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.2), 0 5px 10px 0 rgba(0, 0, 0, 0.19);
-  border-left-width: 3px !important;
-  border-left-color: black !important;
+  border-radius: 1px;
+  /* border-left-width: 3px !important;
+  border-left-color: black !important; */
 
 }
 
@@ -15,17 +16,24 @@
 .individual-card:hover {
   cursor: pointer;
   /* border-top: 1px solid orange; */
-  border-left-width: 4px !important;
-  border-left-color: black !important;
+  /* border-left-width: 4px !important;
+  border-left-color: black !important; */
 }
 
 .individual-card:active:hover {
   opacity:0.25;
   cursor: pointer;
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 
+/* .arrowRight{
+  align-content: flex-end;
+} */
+
+.arrowRight:hover{
+  color: darkgray;
+}
 
 
 .browse-projects {

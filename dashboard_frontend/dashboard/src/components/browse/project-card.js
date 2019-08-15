@@ -1,7 +1,15 @@
 import React, { Component } from "react";
-import Card from 'react-bootstrap/Card'
-import Badge from 'react-bootstrap/Badge'
-import Modal from 'react-bootstrap/Modal'
+import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/Badge';
+import Modal from 'react-bootstrap/Modal';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+import { Redirect } from 'react-router-dom';
+
+import ProjectCategoryBadges from '../group_components/ProjectCategoryBadges.js'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 import './project-card.css'
@@ -56,7 +64,12 @@ export default class BrowseProjectCard extends Component {
       <Card className="individual-card" onClick={() => this.handleClick()}>
       <Card.Body className="individual-card-body">
         {items}
-        <Card.Title>{this.props.title}</Card.Title>
+        <div className="float-right">
+        <span /><FontAwesomeIcon icon="arrow-right" className="arrowRight"/>
+        </div>
+        <Card.Title>
+        {this.props.title}
+        </Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
             <a href={PROJECT_URL}>Link to Project Page</a>
         </Card.Subtitle>
@@ -66,6 +79,7 @@ export default class BrowseProjectCard extends Component {
 
       </Card.Body>
       <Card.Footer>
+      <b>Category: </b> <ProjectCategoryBadges category={this.props.category} />
       </Card.Footer>
       </Card>
       </>

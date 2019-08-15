@@ -1,25 +1,56 @@
 .individual-link {
   color: #484646 !important;
   color: black !important;
-  /* font-weight: bold !important; */
+  font-family: Helvetica !important;
+
 }
 
 .nav-link:hover {
-  background-color: #DAD1CF !important;
-  border-radius: 2px !important;
+  /* background-color: #DAD1CF !important;
+  border-radius: 2px !important; */
+  border-bottom: 3px solid black !important;
+  font-family: Helvetica !important;
+  font-weight: bold !important;
+  color: black !important;
 }
 
+.nav-item {
+  padding-right: 10px !important;
+}
+
+.profile-dropdown{
+  color: #ff9999 !important;
+  font-family: Helvetica !important;
+  border: none !important;
+  font-weight: bold !important;
+}
+
+.profile-dropdown:hover{
+  font-family: Helvetica !important;
+  border: none !important;
+  color: #ff9999 !important;
+}
+
+.logout {
+  color: #CD5C5C;
+  font-weight: bold;
+}
+
+.logout:hover {
+  color: #CD5C5C;
+  font-weight: bold;
+}
 
 /* .navbar ul{
   padding: 0px 15px !important;
 } */
 
 #navbar-link-id {
-  color: #484646;
+  /* color: #484646;
   font-style: bold;
   font-weight: bold !important;
   padding: 5px 5px;
-  text-decoration:none;
+  text-decoration:none; */
 }
 
 .nav-link-login:hover {
@@ -27,6 +58,43 @@
   border-radius: 2px;
 }
 
+.register-nav-link {
+  font-family: Helvetica !important;
+  background-color: purple;
+  border-radius: 5px;
+  border-color: purple;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.register-nav-link:hover {
+  font-family: Helvetica !important;
+  background-color: purple !important;
+  border: none !important;
+  border-radius: 10px !important;
+  border-color: purple !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.login-nav-link {
+  font-family: Helvetica !important;
+  background-color: #f08080 !important;
+  border-radius: 5px !important;
+  border-color: #f08080 !important;
+  color: white !important;
+  font-weight: bold !important;
+}
+
+.login-nav-link:hover {
+  font-family: Helvetica !important;
+  background-color: #f08080 !important;
+  border: none !important;
+  border-radius: 10px !important;
+  border-color: #f08080 !important;
+  color: white !important;
+  font-weight: bold !important;
+}
 .navbar {
   /* background: linear-gradient(45deg, #EC6F66, #F3A183);
   background: linear-gradient(45deg, #ED4264, #FFEDBC);
@@ -38,6 +106,20 @@
   /* border-bottom-color: black !important;
   border-bottom-width: 5px !important; */
 }
+
+
+.divider-vertical {
+height: 75%;
+/* margin: 0 0px; */
+border-left: 1px solid rgb(221, 221, 221);
+}
+
+.dividerItem {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
 
 .navbar-brand {
   padding-left: 50px;

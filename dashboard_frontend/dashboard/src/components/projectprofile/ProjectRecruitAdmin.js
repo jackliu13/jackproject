@@ -36,7 +36,7 @@ export default class ProjectRecruitAdmin extends React.Component {
     }
     else {
       return (
-        <p><b>There is no current listings for this project</b></p>
+        <p><b>There are no current listings for this project</b></p>
       )
     }
 

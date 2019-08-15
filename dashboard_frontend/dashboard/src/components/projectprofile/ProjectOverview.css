@@ -1,8 +1,8 @@
 .joinProject {
   background-color: #f08080	;
-  width: 40%;
-  height: 80px;
-  justify-content: flex-end;
+  width: 35%;
+  height: 45px;
+  justify-content: center !important;
   outline: none !important;
   border-top: none !important;
   border-right: none !important;

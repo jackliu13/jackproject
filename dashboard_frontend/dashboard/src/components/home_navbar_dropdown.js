@@ -19,7 +19,7 @@ export default class NavDropdown extends React.Component {
     const classDropdownMenu = 'dropdown-menu dropdown-menu-right' + (this.state.isToggleOn ? ' show' : '')
     return (
       <li className="nav-item dropdown">
-        <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown"
+        <a className="nav-link dropdown-toggle profile-dropdown" href="/" id="navbarDropdown" role="button" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false"
           onClick={(e) => {this.showDropdown(e)}}>
           {this.props.name}

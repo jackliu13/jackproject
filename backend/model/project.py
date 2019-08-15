@@ -2,7 +2,7 @@ from database.orm import ORM
 from .user_project import UserProject
 class Project(ORM):
 
-    fields = ['owner', 'title', 'description', 'tags']
+    fields = ['owner', 'title', 'description', 'tags', 'category', 'updates']
     dbtable = "project"
 
     def __init__(self, **kwargs):
@@ -11,6 +11,8 @@ class Project(ORM):
         self.title = kwargs.get('title')
         self.description = kwargs.get('description')
         self.tags = kwargs.get('tags')
+        self.category = kwargs.get('category')
+        self.updates = kwargs.get('updates')
         # self.tags = kwargs.get('tags') #Potentially a dictionary
         # self.creationdate = kwargs.get('creationdate')
         # self.api_key = kwargs.get('api_key',self.generate_api_key())
@@ -46,6 +48,25 @@ class Project(ORM):
         return cls.select_all_where(SQL, (userid,))
 
     @classmethod
+    def projects_ownedBy(cls, ownerid):
+        SQL = """SELECT * FROM project WHERE owner=%s;
+            """
+        return cls.select_all_where(SQL, (ownerid,))
+
+    @classmethod
+    def search_projects_byCategory(cls, category):
+        SQL = """SELECT * FROM project WHERE category=%s;
+            """
+        return cls.select_all_where(SQL, (category,))
+
+    @classmethod
+    def search_projects_byTag(cls, tag):
+        SQL = """SELECT * FROM project WHERE %s=ANY (tags);
+            """
+        return cls.select_all_where(SQL, (tag,))
+
+
+    @classmethod
     def project_info(cls, id):
         SQL = "SELECT project.* FROM project WHERE id=%s;"
         project = cls.select_one(SQL, (id,))
@@ -59,5 +80,7 @@ class Project(ORM):
         "title": self.title,
         "description": self.description,
         "tags": self.tags,
-        "owner": self.owner
+        "owner": self.owner,
+        "category": self.category,
+        "updates": self.updates
     }

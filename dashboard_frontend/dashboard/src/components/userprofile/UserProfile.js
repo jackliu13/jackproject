@@ -16,6 +16,8 @@ import './UserProfile.css';
 import UserProfileProjects from './User-Profile-Projects.js'
 import BrowseProjectCollection from '../browse/project-card-collection.js';
 
+import {BASE_URL} from '../../services/database-config.js';
+
 export default class UserProfile extends React.Component {
 
   state = {
@@ -35,7 +37,7 @@ export default class UserProfile extends React.Component {
 
   componentDidMount(){
     this.findUserInfo()
-    const url = "http://127.0.0.1:5000/api/projects/fromuser"
+    const url = BASE_URL + "/api/projects/fromuser"
     const promise = fetch(url,{
     method: "post",
     mode: "cors",
@@ -59,7 +61,7 @@ export default class UserProfile extends React.Component {
 
 
   findUserInfo(){
-    const url = "http://127.0.0.1:5000/api/user"
+    const url = BASE_URL + "/api/user"
     const promise = fetch(url,{
     method: "post",
     mode: "cors",
@@ -95,11 +97,11 @@ export default class UserProfile extends React.Component {
         />
       </Figure>
       <h1>{this.state.userinfo.realname}</h1>
-      <p><b> 731 </b> Projects</p>
 
       <div>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc pulvinar at arcu id finibus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Aenean lacinia urna metus, eu vestibulum augue posuere quis. Vestibulum pretium, mauris ut pharetra mollis, dui lectus porttitor magna, ut dignissim sem nunc ut mi.
-
+      <b>Bio</b>
+      <br />
+      No Description
       <br />
       <br />
       <b>Location: </b>

@@ -12,9 +12,10 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import "./upload-project-form.css";
 
-import Stepper from '../utilities/stepper.js'
 
-import TagInput from "./upload-project-form-tags.js"
+import TagInput from "./upload-project-form-tags.js";
+import ProjectCategoryBadges from '../group_components/ProjectCategoryBadges.js'
+import {BASE_URL} from '../../services/database-config.js';
 
 export default class UploadProjectForm extends Component {
   constructor(props) {
@@ -25,6 +26,7 @@ export default class UploadProjectForm extends Component {
       title: "",
       description: "",
       tags: [],
+      selected_category: "",
       showToast: false
     };
   }
@@ -40,8 +42,20 @@ export default class UploadProjectForm extends Component {
     });
   }
 
+  handleCategoryChange = event => {
+    this.setState({
+      selected_category : event.target.value
+    });
+  }
+
+  backwardsCategoryChange = event => {
+    this.setState({
+      selected_category: ""
+    });
+  }
+
   handleSubmit = event => {
-    const url = "http://127.0.0.1:5000/api/projects/create-project"
+    const url = BASE_URL + "/api/projects/create-project"
     console.log(this.state.title, this.state.description)
     const promise = fetch(url, {
       method: 'post',
@@ -51,7 +65,8 @@ export default class UploadProjectForm extends Component {
         title: this.state.title,
         description: this.state.description,
         tags: this.state.tags,
-        owner: window.sessionStorage.getItem('user_id')
+        owner: window.sessionStorage.getItem('user_id'),
+        category: this.state.selected_category
       })
     });
     promise.then(this.toggleShowToast())
@@ -83,9 +98,10 @@ export default class UploadProjectForm extends Component {
         You have successfully submitted your project! Click <b><a href="/home/browse">here</a></b> to browse all projects
         </Toast.Body>
       </Toast>
-        <center><Stepper /></center>
         <form onSubmit={this.handleSubmit}>
           <Form.Group>
+            <Row>
+            <Col>
             <Label>Project Title</Label>
             <FormControl
               autoFocus
@@ -97,6 +113,38 @@ export default class UploadProjectForm extends Component {
             <Form.Text className="text-muted">
               Make your project title short & concise
             </Form.Text>
+            </Col>
+            <Col>
+
+            {
+              (this.state.selected_category) ?
+
+              <Row className="category-selected">
+              <h3 className="category-label-selected">Selected Category: </h3>
+              <ProjectCategoryBadges className="categoryBadge" category={this.state.selected_category} onClick={this.backwardsCategoryChange}/>
+              </Row>
+              :
+              <>
+              <Label>Project Category</Label>
+              <Form.Control as="select" onChange={this.handleCategoryChange}>
+                <option disabled selected value> -- select an option -- </option>
+                <option>Tech</option>
+                <option>Art</option>
+                <option>Business</option>
+                <option>Crafts</option>
+                <option>Video & Animation</option>
+                <option>Other</option>
+              </Form.Control>
+              <Form.Text className="text-muted">
+                Select an appropriate category for your project
+              </Form.Text>
+              </>
+            }
+
+
+
+            </Col>
+            </Row>
           </Form.Group>
           <Form.Group>
             <Label>Project Description</Label>
