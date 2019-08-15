@@ -1,6 +1,21 @@
 import psycopg2
 import psycopg2.extras
 
+global host_user_input
+host_user_input = "jack"
+
+global password_input
+password_input = "password"
+
+global host_input
+host_input = "127.0.0.1"
+
+global port_input
+port_input = "5432"
+
+global database_input
+database_input = "database"
+
 class ORM:
     fields = []
     dbpath = ""
@@ -25,8 +40,8 @@ class ORM:
         return SQL.format(tablename=cls.dbtable, columnlist=columnlist, placeholder=placeholder)
 
     def _insert(self):
-        with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
-                              port = "5432", database = "database") as conn:
+        with psycopg2.connect(user = host_user_input, password = password_input, host = host_input,
+                              port = port_input, database = database_input) as conn:
             cur = conn.cursor()
             SQL = self._create_insert()
             propvals = [getattr(self, propname) for propname in self.fields]
@@ -45,8 +60,8 @@ UPDATE {tablename} SET {update_column_list} WHERE id=%s; """
         return SQL.format(tablename=cls.dbtable, update_column_list=update_column_list)
 
     def _update(self):
-        with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
-                              port = "5432", database = "database") as conn:
+        with psycopg2.connect(user = host_user_input, password = password_input, host = host_input,
+                              port = port_input, database = database_input) as conn:
             cur = conn.cursor()
             SQL = self._create_update()
             propvals = [getattr(self, field) for field in self.fields + ["id"]]
@@ -54,8 +69,8 @@ UPDATE {tablename} SET {update_column_list} WHERE id=%s; """
 
     @classmethod
     def select_one(cls, SQL, values=tuple()):
-        with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
-                              port = "5432", database = "database") as conn:
+        with psycopg2.connect(user = host_user_input, password = password_input, host = host_input,
+                              port = port_input, database = database_input) as conn:
             cur = conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
             cur.execute(SQL, values)
             row = cur.fetchone()
@@ -66,8 +81,8 @@ UPDATE {tablename} SET {update_column_list} WHERE id=%s; """
     @classmethod
     def select_all(cls, fromwhere=""):
         SQL = "SELECT * FROM " + fromwhere + ";"
-        with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
-                              port = "5432", database = "database") as conn:
+        with psycopg2.connect(user = host_user_input, password = password_input, host = host_input,
+                              port = port_input, database = database_input) as conn:
             cur = conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
             cur.execute(SQL)
             rows = cur.fetchall()
@@ -76,8 +91,8 @@ UPDATE {tablename} SET {update_column_list} WHERE id=%s; """
     #USE when you need a more specific select_all statement (with inputed values)
     @classmethod
     def select_all_where(cls, SQL, values=tuple()):
-        with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
-                              port = "5432", database = "database") as conn:
+        with psycopg2.connect(user = host_user_input, password = password_input, host = host_input,
+                              port = port_input, database = database_input) as conn:
             cur = conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
             cur.execute(SQL, values)
             rows = cur.fetchall()
@@ -101,8 +116,8 @@ UPDATE {tablename} SET {update_column_list} WHERE id=%s; """
     @classmethod
     def from_id(cls, id):
         SQL = "SELECT * FROM {tablename} WHERE id=%s"
-        with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
-                              port = "5432", database = "database") as conn:
+        with psycopg2.connect(user = host_user_input, password = password_input, host = host_input,
+                              port = port_input, database = database_input) as conn:
             cur = conn.cursor(cursor_factory = psycopg2.extras.RealDictCursor)
             cur.execute(SQL.format(tablename=cls.dbtable), (id,))
             row = cur.fetchone()
@@ -117,8 +132,8 @@ UPDATE {tablename} SET {update_column_list} WHERE id=%s; """
     #
     def delete(self):
         SQL = "DELETE FROM {tablename} WHERE id=%s"
-        with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
-                              port = "5432", database = "database") as conn:
+        with psycopg2.connect(user = host_user_input, password = password_input, host = host_input,
+                              port = port_input, database = database_input) as conn:
             cur = conn.cursor()
             cur.execute(SQL.format(tablename=self.dbtable), (self.id,))
             self.id = None

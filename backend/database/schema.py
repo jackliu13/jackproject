@@ -1,38 +1,38 @@
 import psycopg2
 
-class Schema:
-    def __init__(self):
-        self.conn = psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
-                              port = "5432", database = "database")
-        self.cursor = self.conn.cursor()
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, type_, value, traceback):
-        if self.conn:
-            if self.cursor:
-                self.conn.commit()
-                self.cursor.close()
-            self.conn.close()
-
-    def create_table(self, table_name):
-        self.cursor.execute(f'''
-			DROP TABLE IF EXISTS {table_name};
-			''')
-        self.cursor.execute(f'''
-			CREATE TABLE {table_name}
-			(
-			pk INT PRIMARY KEY AUTOINCREMENT NOT NULL
-			);
-			''')
-
-
-    def modify_table(self, table_name, column_name, column_type):
-        self.cursor.execute(f'''
-            ALTER TABLE {table_name}
-            ADD COLUMN {column_name} {column_type};
-            ''')
+# class Schema:
+#     def __init__(self):
+#         self.conn = psycopg2.connect(user = host_user_input, password = password_input, host = host_input,
+#                               port = port_input, database = database_input)
+#         self.cursor = self.conn.cursor()
+#
+#     def __enter__(self):
+#         return self
+#
+#     def __exit__(self, type_, value, traceback):
+#         if self.conn:
+#             if self.cursor:
+#                 self.conn.commit()
+#                 self.cursor.close()
+#             self.conn.close()
+#
+#     def create_table(self, table_name):
+#         self.cursor.execute(f'''
+# 			DROP TABLE IF EXISTS {table_name};
+# 			''')
+#         self.cursor.execute(f'''
+# 			CREATE TABLE {table_name}
+# 			(
+# 			pk INT PRIMARY KEY AUTOINCREMENT NOT NULL
+# 			);
+# 			''')
+#
+#
+#     def modify_table(self, table_name, column_name, column_type):
+#         self.cursor.execute(f'''
+#             ALTER TABLE {table_name}
+#             ADD COLUMN {column_name} {column_type};
+#             ''')
 
 
 # def build_user():
@@ -41,10 +41,30 @@ class Schema:
 #     Schema().modify_table('user_info', 'password', 'VARCHAR')
 #     Schema().modify_table('user_info', 'realname', 'VARCHAR')
 
+# host_user_input = "jack"
+# password_input = "password"
+# host_input = "127.0.0.1"
+# port_input = "5432"
+# database_input = "database"
+
+global host_user_input
+host_user_input = "jack"
+
+global password_input
+password_input = "password"
+
+global host_input
+host_input = "127.0.0.1"
+
+global port_input
+port_input = "5432"
+
+global database_input
+database_input = "database"
 
 def build_user():
-    with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
-                          port = "5432", database = "database") as conn:
+    with psycopg2.connect(user = host_user_input, password = password_input, host = host_input,
+                          port = port_input, database = database_input) as conn:
         cur = conn.cursor()
         cur.execute('''CREATE EXTENSION IF NOT EXISTS "uuid-ossp";''')
         cur.execute("DROP TABLE IF EXISTS user_info CASCADE;")
@@ -61,8 +81,8 @@ def build_user():
 
 
 def build_project():
-    with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
-                          port = "5432", database = "database") as conn:
+    with psycopg2.connect(user = host_user_input, password = password_input, host = host_input,
+                          port = port_input, database = database_input) as conn:
         cur = conn.cursor()
         cur.execute("DROP TABLE IF EXISTS project CASCADE;")
         cur.execute('''
@@ -78,8 +98,8 @@ def build_project():
                 )''')
 
 def build_user_project():
-    with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
-                          port = "5432", database = "database") as conn:
+    with psycopg2.connect(user = host_user_input, password = password_input, host = host_input,
+                          port = port_input, database = database_input) as conn:
         cur = conn.cursor()
         cur.execute("DROP TABLE IF EXISTS user_project CASCADE;")
         cur.execute('''
@@ -94,8 +114,8 @@ def build_user_project():
                 )''')
 
 def build_recruit():
-    with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
-                          port = "5432", database = "database") as conn:
+    with psycopg2.connect(user = host_user_input, password = password_input, host = host_input,
+                          port = port_input, database = database_input) as conn:
         cur = conn.cursor()
         cur.execute("DROP TABLE IF EXISTS recruit CASCADE;")
         cur.execute('''
@@ -109,8 +129,8 @@ def build_recruit():
                 )''')
 
 def build_recruit_request():
-    with psycopg2.connect(user = "jack", password = "password", host = "127.0.0.1",
-                          port = "5432", database = "database") as conn:
+    with psycopg2.connect(user = host_user_input, password = password_input, host = host_input,
+                          port = port_input, database = database_input) as conn:
         cur = conn.cursor()
         cur.execute("DROP TABLE IF EXISTS recruit_request CASCADE;")
         cur.execute('''
